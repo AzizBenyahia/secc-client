@@ -4,11 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strings"
 )
 
 // GetCoffees - Returns list of coffees (no auth required)
-func (c *Client) GetPermissions() (Permissions, error) {
+func (c *Client) GetPermissions() (*Permissions, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/public/organization/permissions", c.HostURL), nil)
 	if err != nil {
 		return nil, err
@@ -25,7 +24,7 @@ func (c *Client) GetPermissions() (Permissions, error) {
 		return nil, err
 	}
 
-	return permissions, nil
+	return &permissions, nil
 }
 
 // GetCoffee - Returns specific coffee (no auth required)

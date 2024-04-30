@@ -13,22 +13,23 @@ type Permissions struct {
 	// jwt.StandardClaims
 }
 type RoleByPermissions struct {
-	
-	Permissions Permissions   `json:"Permissions"`
+    Permissions []string `json:"Permissions"`
 }
+
+
 
 type Role struct {
 	
 	Name string   `json:"description"`
 	Description string   `json:"description"`
-
+	Permissions []string  `json:"permissions"`
 }
-
 type RoleItem struct {
-	ID    int         `json:"id,omitempty"`
-	Name   string `json:"Name"`
-	Description      string   `json:"description"`
+	ID          string  `json:"id,omitempty"`
+	Name        string  `json:"name"`
+	Description string `json:"description,omitempty"` // Use a pointer for nullable fields
 }
+
 
 
 // Ingredient -

@@ -27,7 +27,7 @@ type AuthResponse struct {
 }
 
 // NewClient -
-func NewClient(host, token *string) (*Client, error) {
+func NewClient(host,orgid,token *string) (*Client, error) {
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
 		// Default Hashicups URL
@@ -56,7 +56,7 @@ func (c *Client) doRequest(req *http.Request , authToken *string) ([]byte, error
 		token = *authToken
 	}
 
-	req.Header.Set("Authorization", token)
+	req.Header.Set("Authorization", "Bearer " +token)
 
 	res, err := c.HTTPClient.Do(req)
 	if err != nil {
