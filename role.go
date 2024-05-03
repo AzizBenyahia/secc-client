@@ -9,8 +9,8 @@ import (
 )
 
 // GetAllOrders - Returns all user's order
-func (c *Client) GetAllRoles(authToken *string,orgId *string) (*[]RoleItem, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/organization/roles/%s", c.HostURL,orgId), nil)
+func (c *Client) GetAllRoles(authToken *string) (*[]RoleItem, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/organization/roles/%s", c.HostURL,c.OrgID), nil)
 	if err != nil {
 		return nil, err
 	}
