@@ -43,8 +43,9 @@ func NewClient(host,orgid,token *string) (*Client, error) {
 	if token != nil {
 		c.Token = *token
 	}
-	c.Token = *token
-
+	if orgid != nil {
+		c.OrgID = *orgid
+	}
 
 	return &c, nil
 }
