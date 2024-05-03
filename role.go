@@ -50,7 +50,7 @@ func (c *Client) GetRole(roleId string, authToken *string) (*RolePermissions, er
     return &rolePermissions, nil
 }
 	// CreateOrder - Create new order
-	func (c *Client) CreateRole(role *Role, authToken *string) (*RoleItem, error) {
+	func (c *Client) CreateRole(role *Role, authToken *string)   {
 		// Initialize the roleData map
 		roleData := make(map[string]interface{})
 		roleData["name"] = role.Name
@@ -59,13 +59,13 @@ func (c *Client) GetRole(roleId string, authToken *string) (*RolePermissions, er
 		// Marshal roleData to JSON
 		rb, err := json.Marshal(roleData)
 		if err != nil {
-			return nil,err
+			return 
 		}
 	
 		// Create the HTTP request to create the role
 		req, err := http.NewRequest("POST", fmt.Sprintf("%s/organization/createRole/%s", c.HostURL, c.OrgID), strings.NewReader(string(rb)))
 		if err != nil {
-			return nil,err
+			return 
 		}
 	
 		// Perform the request to create the role
@@ -77,7 +77,7 @@ func (c *Client) GetRole(roleId string, authToken *string) (*RolePermissions, er
 		err = json.Unmarshal(body, &createdRole)
 
 		if err != nil {
-			return nil,err
+			return 
 		}
 	
 		// Create the JSON request body for setting permissions
@@ -89,21 +89,21 @@ func (c *Client) GetRole(roleId string, authToken *string) (*RolePermissions, er
 		fmt.Println(permissionsList)
 		rbPermissions, err := json.Marshal(permissionsList)
 		if err != nil {
-			return nil,err
+			return 
 		}
 	
 		// Create the HTTP request to set permissions for the role
 		reqPermissions, err := http.NewRequest("POST", fmt.Sprintf("%s/organization/role/%s/permissions", c.HostURL, createdRole.ID), strings.NewReader(string(rbPermissions)))
 		if err != nil {
-			return nil,err
+			return 
 		}
 	
 		// Perform the request to set permissions for the role
 		_, err = c.doRequest(reqPermissions, authToken)
 		if err != nil {
-			return nil,err
+			return 
 		}
-	    return &createdRole, nil
+	    return 
 
 		}
 		
